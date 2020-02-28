@@ -19,6 +19,7 @@
           </section>
           <section>
             <rule>
+              <match>
                 <AND>
                   <NAME>xmlns:.*</NAME>
                   <XML_ATTRIBUTE />
