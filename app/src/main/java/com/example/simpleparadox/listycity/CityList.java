@@ -33,33 +33,41 @@ public class CityList {
         return list;
     }
 
-    /****new*****/
+    /****check if the cityList contains a certain city***/
     public boolean hasCity(City city) {
-        for (City c : cities) {
-            if (c.getCityName().equals(city.getCityName()) && c.getProvinceName().equals(city.getProvinceName())) {
+
+        for (City currCity : cities) {
+            /**check if both city name and province name matches**/
+            if (currCity.getCityName().compareTo(city.getCityName()) == 0 && currCity.getProvinceName().compareTo(city.getProvinceName()) == 0) {
                 return true;
+            }else{
+                break;
             }
         }
         return false;
     }
 
-    /***new****/
+    /***check if a city is in the list, and if it is, remove it **/
     public void delete(City city){
-        if(!hasCity(city)){
+        /**check first to see if the city is in the list**/
+        if(hasCity(city) == false){
             throw new IllegalArgumentException();
         }
 
-        for(City c : cities){
-            if(c.compareTo(city) == 0){
-                cities.remove(c);
+        /**loop over cities**/
+        /**don't use == to compare objects**/
+        for(City currCity : cities){
+            if(currCity.compareTo(city) == 0){
+                cities.remove(currCity);
                 break;
             }
         }
     }
 
-    /****new***/
+    /**return city list size**/
     public int countCities(){
-        return cities.size();
+        int cityListLen = cities.size();
+        return cityListLen;
     }
 }
 

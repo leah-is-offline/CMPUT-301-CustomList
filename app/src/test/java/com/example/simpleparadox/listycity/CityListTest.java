@@ -45,41 +45,40 @@ class CityListTest {
         assertEquals(0, mockCity().compareTo(cityList.getCities().get(1)));
     }
 
-    /****new****/
+    /****assert True tests if the parameter passed returns true
+     * hasCity returns boolean***/
     @Test
     void testHasCity() {
         CityList cityList = mockCityList();
-
         assertTrue(cityList.hasCity(mockCity()));
     }
 
 
 
-    /*****new****/
+    /*****delete the Mock city from Mock City list****/
     @Test
     void testDeleteCity() {
         CityList cityList = mockCityList();
-
-        City city = new City("Victoria", "British Columbia");
-        cityList.add(city);
-
-        assertEquals(2, cityList.countCities());
-
         cityList.delete(mockCity());
 
-        assertEquals(1, cityList.countCities());
-        assertEquals(0, city.compareTo(cityList.getCities().get(0)));
+        assertFalse(cityList.hasCity(mockCity()));
+        assertTrue(cityList.countCities() == 0);
+
     }
 
-    /****new****/
+    /****see if delete exception will be thrown****/
     @Test
     void testDeleteException() {
         CityList cityList = mockCityList();
-
         cityList.delete(mockCity());
 
+        /**create a city and don't add it to the mockCityList**/
+        City throwsCity = new City("x","y");
+
+        /**citation: https://howtodoinjava.com/junit5/expected-exception-example/**/
+
         assertThrows(IllegalArgumentException.class, () -> {
-            cityList.delete(mockCity());
+            cityList.delete(throwsCity);
         });
     }
 
@@ -87,9 +86,11 @@ class CityListTest {
     @Test
     void testCountCities() {
         CityList cityList = mockCityList();
-
+        /**create a cityList containing one City**/
         assertEquals(1, cityList.countCities());
     }
+
+
 
 
 }
